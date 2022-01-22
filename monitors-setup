@@ -19,7 +19,7 @@ done
 
 while ([ -v $HZ2 ])
 do
-    echo 'Secondary monitors:'
+    echo 'Secondary monitor:'
     echo '1. 75hz'
     echo '2. 60hz'
     echo '3. Off'
@@ -49,7 +49,7 @@ if [ $HZ2 = -1 ]; then
 else
     while ([ -v $FCP2 ])
     do
-        read -n1 -p 'Force composition pipeline on secondary monitors (y/n)? ' U4
+        read -n1 -p 'Force composition pipeline on secondary monitor (y/n)? ' U4
         echo ''
 
         case $U4 in
@@ -57,5 +57,5 @@ else
             [Nn]) FCP2='Off';;
         esac
     done
-    nvidia-settings -a CurrentMetaMode="DP-0: 1920x1080_$HZ1 +1920+0 {ForceCompositionPipeline=$FCP1}, HDMI-0: 1920x1080_$HZ2 +0+0 {ForceCompositionPipeline=$FCP2}, DVI-D-0: 1280x1024_$HZ2 +3840+56 {ForceCompositionPipeline=$FCP2}"
+    nvidia-settings -a CurrentMetaMode="DP-0: 1920x1080_$HZ1 +1920+0 {ForceCompositionPipeline=$FCP1}, HDMI-0: 1920x1080_$HZ2 +0+0 {ForceCompositionPipeline=$FCP2}"
 fi

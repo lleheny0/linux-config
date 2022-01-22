@@ -15,20 +15,12 @@ y=$(( y - y_offset))
 width=$(xdotool getwindowgeometry "$window_id" | awk '/Geometry:/ { print $2 }'|cut -d"x" -f1)
 height=$(xdotool getwindowgeometry "$window_id" | awk '/Geometry:/ { print $2 }'|cut -d"x" -f2)
 
-if [ "$x" -lt 3840 ]; then
-    if [ "$x" -lt 1920 ]; then
-        new_x=$((960 - x_offset - width / 2))
-    else
-        new_x=$((2880 - x_offset - width / 2))
-    fi
+if [ "$x" -lt 1920 ]; then
+    new_x=$((960 - x_offset - width / 2))
 else
-    new_x=$((4480 - x_offset - width / 2))
+    new_x=$((2880 - x_offset - width / 2))
 fi
 
-if [ "$x" -lt 3840 ]; then
-    new_y=$((540 - 40 - height / 2))
-else
-    new_y=$((540 - height / 2))
-fi
+new_y=$((540 - 38 - height / 2))
 
 xdotool windowmove "$window_id" "$new_x" "$new_y"

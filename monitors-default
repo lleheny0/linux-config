@@ -2,5 +2,4 @@
 
 # xrandr --output DP-0 --mode 1920x1080 --rate 144
 # xrandr --output HDMI-0 --mode 1920x1080 --rate 75
-# xrandr --output DVI-D-0 --mode 1280x1024 --rate 75
-nvidia-settings -a CurrentMetaMode="DP-0: 1920x1080_120 +1920+0 {ForceCompositionPipeline=On}, HDMI-0: 1920x1080_60 +0+0 {ForceCompositionPipeline=On}, DVI-D-0: 1280x1024_60 +3840+56 {ForceCompositionPipeline=On}"
+nvidia-settings -a CurrentMetaMode="DP-0: 1920x1080_120 +1920+0 {ForceCompositionPipeline=On}, HDMI-0: 1920x1080_60 +0+0 {ForceCompositionPipeline=On}"

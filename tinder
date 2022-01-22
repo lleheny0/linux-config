@@ -1,0 +1,26 @@
+#!/bin/sh
+
+n=0
+
+while true
+do
+	xdotool search --class firefox key --window %@ 0xff53
+  echo "   $n"
+  printf "\033[1A"
+  let n++
+
+  if ! (( $n % 50 ));
+  then
+    xdotool search --class firefox key --window %@ 0xff1b
+  fi
+
+  if ! (( $n % 1000 ));
+  then
+    xdotool search --class firefox keydown --window %@ 0xffe3
+    xdotool search --class firefox keydown --window %@ 0xffe1
+	  xdotool search --class firefox key --window %@ 0x0072
+    xdotool search --class firefox keyup --window %@ 0xffe1
+    xdotool search --class firefox keyup --window %@ 0xffe3
+  fi
+done
+
