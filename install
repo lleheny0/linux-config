@@ -1,1 +1,5 @@
 #!/bin/sh
+
+yay
+yay -S picom redshift xcursor-retrosmart skeuos-gtk
+cp -r config/* $HOME/.config
