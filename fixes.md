@@ -14,3 +14,12 @@ Set `media.rdd-process.enabled` to `false` in about:config
 ### Solution
 1. Install `vulkan-radeon` package
 2. Add `AMD_VULKAN_ICD=RADV` to `/etc/environment`
+
+## Font rendering is bad in GTK4
+### Reproduce
+1. Open firefox
+2. Look at the interface fonts
+3. Go to wikipedia.org
+4. Look at the web fonts
+### Solution
+Add the `gtk-hint-font-metrics=1` to `~/.config/gtk-4.0/settings.ini`
