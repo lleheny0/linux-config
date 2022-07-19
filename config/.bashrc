@@ -187,7 +187,6 @@ _Pacdiff() {
 # alias pacdiff=_Pacdiff
 ################################################################################
 alias rc='vim /home/luke/.bashrc'
-alias mb='ssh lukeleheny@192.168.1.151'
 alias op='ssh luke@192.168.1.218'
 alias gm='ssh luke@192.168.1.218 -t "watch -n 1 mpc"'
 alias mc='ssh luke@192.168.1.218 -t "tmux attach"'
@@ -195,5 +194,5 @@ alias rs='vim /home/luke/.config/redshift/redshift.conf'
 alias ac='vim /home/luke/.config/alacritty/alacritty.yml'
 alias at='alacritty-themes'
 alias tn='/home/luke/scripts/tinder'
-alias tsc='sudo timeshift --create'
-alias tsd='sudo timeshift --delete'
+alias tc='sudo timeshift --create'
+alias td='sudo timeshift --delete'
