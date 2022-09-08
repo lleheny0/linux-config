@@ -1,7 +1,0 @@
-#!/bin/sh
-
-yay
-yay -S picom redshift xcursor-retrosmart skeuos-gtk papirus-icon-theme gnu-free-fonts univga albert emote
-cp -r config/* $HOME/.config
-mkdir -p $HOME/.themes
-cp -r themes/* $HOME/.themes
