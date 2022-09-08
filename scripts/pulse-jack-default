@@ -1,4 +1,0 @@
-#!/bin/sh
-
-pacmd set-default-sink jack_out
-pacmd set-default-source jack_in
