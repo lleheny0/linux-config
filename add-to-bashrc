@@ -5,6 +5,15 @@ alias mc='ssh luke@192.168.1.218 -t "tmux attach"'
 alias tc='sudo timeshift --create'
 alias td='sudo timeshift --delete'
 alias sc='snapclient --host 192.168.1.218 --player alsa --sampleformat 48000:16:*'
+alias env='sudo vim /etc/environment'
+alias ek='sudo vim /etc/keyd/default.conf'
+alias uk='sudo systemctl restart keyd'
+alias sb='source ~/.bashrc'
+
+alias gl='git pull'
+alias gs='git status'
+alias gaa='git add --all'
+alias gc='git commit'
 
 sl () {
   ssh luke@192.168.1.$1
