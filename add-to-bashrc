@@ -8,11 +8,12 @@ alias sc='snapclient --host 192.168.1.218 --player alsa --sampleformat 48000:16:
 alias env='sudo vim /etc/environment'
 alias ek='sudo vim /etc/keyd/default.conf'
 alias uk='sudo systemctl restart keyd'
+alias km='sudo keyd -m'
 alias sb='source ~/.bashrc'
 
 alias gl='git pull'
 alias gs='git status'
-alias gaa='git add --all'
+alias ga='git add --all'
 alias gc='git commit'
 
 sl () {
