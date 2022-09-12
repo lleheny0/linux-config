@@ -1,5 +1,4 @@
 #!/bin/sh
 
-# xrandr --output DP-0 --mode 1920x1080 --rate 144
-# xrandr --output HDMI-0 --mode 1920x1080 --rate 75
-nvidia-settings -a CurrentMetaMode="DP-0: 1920x1080_120 +1920+0 {ForceCompositionPipeline=On}, HDMI-0: 1920x1080_60 +0+0 {ForceCompositionPipeline=On}"
+xrandr --output DisplayPort-0 --mode 1920x1080 --rate 120
+xrandr --output HDMI-A-0 --mode 1920x1080 --rate 59.94 --left-of DisplayPort-0

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+xfce4-screenshooter -rcs /home/luke/Pictures/Screenshots/Screenshot_$(date -Is).png

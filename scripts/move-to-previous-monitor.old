@@ -36,15 +36,19 @@ x=$(( x - x_offset))
 y=$(( y - y_offset))
 
 # Compute new X position
-new_x=$((x + display_width))
+if [ "$x" -lt 1920 ]; then
+    new_x=$((x - 1280))
+else
+    new_x=$((x - 1920))
+fi
 # Compute new Y position
 new_y=$((y + display_height))
 
-# If we would move off the right-most monitor, we set it to the left one.
+# If we would move off the left-most monitor, we set it to the right one.
 # We also respect the window's width here: moving a window off more than half its width won't happen.
 width=$(xdotool getwindowgeometry "$window_id" | awk '/Geometry:/ { print $2 }'|cut -d"x" -f1)
-if [ "$(( new_x + width / 2))" -gt "$screen_width" ]; then
-    new_x=$((new_x - screen_width))
+if [ "$(( new_x + width / 2))" -lt 0 ]; then
+    new_x=$((new_x + screen_width))
 fi
 
 height=$(xdotool getwindowgeometry "$window_id" | awk '/Geometry:/ { print $2 }'|cut -d"x" -f2)
@@ -66,10 +70,10 @@ fi
 xdotool windowmove "$window_id" "$new_x" "$new_y"
 
 # Maximize window again, if it was before
-if [ -n "${window_horz_maxed}" ] && [ -n "${window_vert_maxed}" ]; then
-    wmctrl -ir "$window_id" -b add,maximized_vert,maximized_horz
-elif [ -n  "${window_horz_maxed}" ]; then
-    wmctrl -ir "$window_id" -b add,maximized_horz
-elif [ -n  "${window_vert_maxed}" ]; then
-    wmctrl -ir "$window_id" -b add,maximized_vert
-fi
+ if [ -n "${window_horz_maxed}" ] && [ -n "${window_vert_maxed}" ]; then
+     wmctrl -ir "$window_id" -b add,maximized_vert,maximized_horz
+ elif [ -n  "${window_horz_maxed}" ]; then
+     wmctrl -ir "$window_id" -b add,maximized_horz
+ elif [ -n  "${window_vert_maxed}" ]; then
+     wmctrl -ir "$window_id" -b add,maximized_vert
+ fi

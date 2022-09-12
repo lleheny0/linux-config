@@ -21,6 +21,6 @@ else
     new_x=$((2880 - x_offset - width / 2))
 fi
 
-new_y=$((540 - 38 - height / 2))
+new_y=$((540 - 37 - height / 2))
 
 xdotool windowmove "$window_id" "$new_x" "$new_y"

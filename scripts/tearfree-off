@@ -1,0 +1,4 @@
+#!/bin/sh
+
+xrandr --output DisplayPort-0 --set TearFree off
+xrandr --output HDMI-A-0 --set TearFree off
