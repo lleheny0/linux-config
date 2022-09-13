@@ -7,6 +7,12 @@
 ### Solution
 Set `media.rdd-process.enabled` to `false` in about:config
 
+## Firefox: Videos are low quality / have artifacts when seeking / are tinted on sections of the screen
+### Reproduce
+1. Load Youtube video (could be easier to see on darker videos)
+### Solution
+Set `media.ffvpx.enabled` to `false` in about:config
+
 ## Vulkan: Games have random flickering textures
 This happens because games are using the `amdvlk` driver instead of the `vulkan-radeon` driver. More info [here](https://wiki.archlinux.org/title/Vulkan).
 ### Reproduce
