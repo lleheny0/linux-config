@@ -10,6 +10,8 @@ alias ek='sudo vim /etc/keyd/default.conf'
 alias uk='sudo systemctl restart keyd'
 alias km='sudo keyd -m'
 alias sb='source ~/.bashrc'
+alias ac='vim ~/.config/alacritty/alacritty.yml'
+alias rsc='vim ~/.config/redshift/redshift.conf'
 
 alias gl='git pull'
 alias gs='git status'
@@ -26,4 +28,8 @@ sctl () {
 
 sctlu () {
   systemctl --user $1 $2
+}
+
+rs () {
+  redshift -PO $100
 }
