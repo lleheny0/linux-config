@@ -1,0 +1,40 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+audio {
+  width: 100%;
+  top: 0;
+}
+
+#metadata {
+  color: white;
+  font-size: 1rem;
+  border: none;
+  font-family: monospace;
+  margin: 10px;
+}
+@media (width <= 800px) {
+  #metadata {
+    font-size: 1.6rem;
+  }
+}
+
+#game-title,
+#track-name {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+@media (width <= 800px) {
+  #game-title,
+  #track-name {
+    font-size: 2.4rem;
+  }
+}
