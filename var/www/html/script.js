@@ -32,8 +32,8 @@ function displayMetadata(info) {
     document.getElementById("pagetitle").innerHTML = `♫ ${info[0]}`;
   } else {
     document.getElementById("metadata").innerHTML =
-      "<div>🎮 Server's down</div>" +
-      "<div>📻 I'm probably updating the library</div>";
+      `<div><span class="emoji">💿</span> Server's down</div>` +
+      `<div><span class="emoji">🎵</span> I'm probably updating the library</div>`;
   }
 }
 
