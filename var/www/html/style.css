@@ -30,3 +30,9 @@ audio {
     font-size: 4rem;
   }
 }
+
+.emoji {
+  display: inline-block;
+  width: 50px;
+  text-align: right;
+}

@@ -25,8 +25,8 @@ function getMetadata() {
 function displayMetadata(info) {
   if (info[0] !== "volume: n") {
     const metadata =
-      `<div id="game-title">🎮 ${info[0]}</div>` +
-      `<div id="track-name">📻 ${info[1].split(".mp3")[0]}</div>`;
+      `<div id="game-title"><span class="emoji">💿</span> ${info[0]}</div>` +
+      `<div id="track-name"><span class="emoji">🎵</span> ${info[1].split(".mp3")[0]}</div>`;
 
     document.getElementById("metadata").innerHTML = metadata;
     document.getElementById("pagetitle").innerHTML = `♫ ${info[0]}`;
