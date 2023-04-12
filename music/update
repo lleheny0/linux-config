@@ -1,0 +1,29 @@
+#!/bin/sh
+
+RESETS=0
+SUCCESS=0
+
+update_mpc() {
+  mpc stop
+  mpc clear
+  mpc update
+  find "$(pwd -P)" | grep mp3 | mpc add
+  mpc play
+  sudo service mpd restart
+}
+
+while [ $SUCCESS -eq 0 ]
+do
+  update_mpc
+  FILE_COUNT=$(find . | grep mp3 | wc -l)
+  MPC_COUNT=$(mpc playlist | wc -l)
+  RESETS=$((RESETS+1))
+  if [ $FILE_COUNT -eq $MPC_COUNT ]
+  then
+    SUCCESS=1
+  else
+    sleep 5
+  fi
+done
+
+echo "Done after ${RESETS} reset(s)"
