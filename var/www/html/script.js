@@ -1,41 +1,44 @@
-let timeout = null;
+let progress = 0,
+  total;
 
-const displayMetadata = (data) => {
-  document.getElementById("pagetitle").innerHTML = `♫ ${data.game}`;
-  document.getElementById("gameInfo").innerHTML = data.game;
-  document.getElementById("trackInfo").innerHTML = data.track;
-  document.getElementById("cover").innerHTML = data.cover
-    ? `<img src="${data.cover}" />`
+const displayMetadata = ({ track, game, cover }) => {
+  document.getElementById("pagetitle").innerHTML = `♫ ${game}`;
+  document.getElementById("gameInfo").innerHTML = game;
+  document.getElementById("trackInfo").innerHTML = track;
+  document.getElementById("cover").innerHTML = cover
+    ? `<img src="${cover}" />`
     : null;
-  document.getElementById("background").innerHTML = data.cover
-    ? `<img src="${data.cover}" />`
+  document.getElementById("background").innerHTML = cover
+    ? `<img src="${cover}" />`
     : null;
 };
 
-const updateMediaSession = (data) => {
+const updateMediaSession = ({ track, game, cover }) => {
   if ("mediaSession" in navigator) {
     navigator.mediaSession.metadata = new MediaMetadata({
-      title: data.track,
-      artist: data.game,
+      title: track,
+      artist: game,
       artwork: [
         {
-          src: data.cover,
+          src: cover,
         },
       ],
     });
   }
 };
 
-const getCurrentDelay = (audio) =>
-  Math.ceil((audio.duration || 0) - (audio.currentTime || 0)) || 4;
+const getDelay = () => {
+  const { currentTime, duration } = document.getElementById("audio");
 
-const updateTimer = ({ remainingTime = 600 }) => {
-  const audio = document.getElementById("audio");
+  return Math.ceil((duration || 0) - (currentTime || 0) || 4);
+};
 
-  timeout = setTimeout(
-    getMetadata,
-    (remainingTime + getCurrentDelay(audio)) * 1000
-  );
+const updateTimer = ({ remainingTime }) =>
+  setTimeout(getMetadata, (remainingTime + getDelay()) * 1000);
+
+const updateProgressBar = ({ remainingTime, trackLength }) => {
+  progress = trackLength - remainingTime - getDelay();
+  total = trackLength;
 };
 
 const getMetadata = () => {
@@ -48,6 +51,7 @@ const getMetadata = () => {
       if (!data.error) {
         displayMetadata(data);
         updateMediaSession(data);
+        updateProgressBar(data);
         updateTimer(data);
       } else {
         document.getElementById("gameInfo").innerHTML = "Music server is down";
@@ -68,7 +72,7 @@ const handleTogglePlayback = (audio) => () => {
     playPause.src = "assets/stop.png";
   } else {
     audio.pause();
-    audio.removeAttribute("src");
+    audio.src = "";
     playPause.src = "assets/play.png";
   }
 };
@@ -112,4 +116,10 @@ const setupControls = () => {
 window.onload = () => {
   getMetadata();
   setupControls();
+  setInterval(() => {
+    progress++;
+    document.getElementById("progressBar").style.width = `${
+      (progress / total) * 100
+    }%`;
+  }, 1000);
 };
