@@ -1,57 +1,115 @@
 let timeout = null;
 
-function getMetadata() {
+const displayMetadata = (data) => {
+  document.getElementById("pagetitle").innerHTML = `♫ ${data.game}`;
+  document.getElementById("gameInfo").innerHTML = data.game;
+  document.getElementById("trackInfo").innerHTML = data.track;
+  document.getElementById("cover").innerHTML = data.cover
+    ? `<img src="${data.cover}" />`
+    : null;
+  document.getElementById("background").innerHTML = data.cover
+    ? `<img src="${data.cover}" />`
+    : null;
+};
+
+const updateMediaSession = (data) => {
+  if ("mediaSession" in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: data.track,
+      artist: data.game,
+      artwork: [
+        {
+          src: data.cover,
+        },
+      ],
+    });
+  }
+};
+
+const getCurrentDelay = (audio) =>
+  Math.ceil((audio.duration || 0) - (audio.currentTime || 0)) || 4;
+
+const updateTimer = ({ remainingTime = 600 }) => {
+  const audio = document.getElementById("audio");
+
+  timeout = setTimeout(
+    getMetadata,
+    (remainingTime + getCurrentDelay(audio)) * 1000
+  );
+};
+
+const getMetadata = () => {
   const xmlhttp = new XMLHttpRequest();
 
   xmlhttp.onreadystatechange = function (resp) {
     if (this.readyState == 4 && this.status == 200) {
-      const lines = this.responseText.split("\n");
-      const info = lines[0].split("/");
+      const data = JSON.parse(this.responseText);
 
-      displayMetadata(info);
-
-      if (info[0] !== "volume: n") {
-        timeout = setTimeout(
-          getMetadata,
-          getTimeRemaining(lines[1].split(" ")[4])
-        );
+      if (!data.error) {
+        displayMetadata(data);
+        updateMediaSession(data);
+        updateTimer(data);
+      } else {
+        document.getElementById("gameInfo").innerHTML = "Music server is down";
+        document.getElementById("trackInfo").innerHTML =
+          "I'm probably updating the library";
       }
     }
   };
   xmlhttp.open("GET", "metadata.php", true);
   xmlhttp.send();
-}
+};
 
-function displayMetadata(info) {
-  if (info[0] !== "volume: n") {
-    const metadata =
-      `<div id="game-title"><span class="emoji">💿</span> ${info[0]}</div>` +
-      `<div id="track-name"><span class="emoji">🎵</span> ${info[1].split(".mp3")[0]}</div>`;
-
-    document.getElementById("metadata").innerHTML = metadata;
-    document.getElementById("pagetitle").innerHTML = `♫ ${info[0]}`;
+const handleTogglePlayback = (audio) => () => {
+  if (audio.paused) {
+    audio.src = `http://[IP]:8000/gamemusic?t=${new Date().getTime()}`;
+    audio.load();
+    audio.play();
+    playPause.src = "assets/stop.png";
   } else {
-    document.getElementById("metadata").innerHTML =
-      `<div><span class="emoji">💿</span> Server's down</div>` +
-      `<div><span class="emoji">🎵</span> I'm probably updating the library</div>`;
+    audio.pause();
+    audio.removeAttribute("src");
+    playPause.src = "assets/play.png";
   }
-}
+};
 
-function getTimeRemaining(times) {
-  const audio = document.getElementsByTagName("audio")[0];
-  const delay =
-    Math.ceil((audio.duration || 0) - (audio.currentTime || 0)) || 4;
+const handleToggleMute = (audio) => () => {
+  if (audio.muted) {
+    audio.muted = false;
+    muted.src = "assets/unmuted.png";
+  } else {
+    audio.muted = true;
+    muted.src = "assets/muted.png";
+  }
+};
 
-  return (
-    (parseInt(times.split("/")[1].split(":")[0]) * 60 +
-      parseInt(times.split("/")[1].split(":")[1]) -
-      (parseInt(times.split("/")[0].split(":")[0]) * 60 +
-        parseInt(times.split("/")[0].split(":")[1])) +
-      delay) *
-    1000
-  );
-}
+const handleChangeVolume = (audio) => (e) => {
+  audio.volume = e.target.value;
+};
 
-window.onload = function () {
+const setupControls = () => {
+  const audio = document.getElementById("audio");
+  const playPause = document.getElementById("playPause");
+  const muted = document.getElementById("muted");
+  const volume = document.getElementById("volume");
+
+  playPause.onclick = handleTogglePlayback(audio);
+  muted.onclick = handleToggleMute(audio);
+  volume.oninput = handleChangeVolume(audio);
+
+  if ("mediaSession" in navigator) {
+    navigator.mediaSession.setActionHandler(
+      "play",
+      handleTogglePlayback(audio)
+    );
+    navigator.mediaSession.setActionHandler(
+      "pause",
+      handleTogglePlayback(audio)
+    );
+  }
+};
+
+window.onload = () => {
   getMetadata();
+  setupControls();
 };
