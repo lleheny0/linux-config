@@ -23,6 +23,7 @@ body {
   justify-content: end;
   height: 100svh;
   overflow: hidden;
+  font-family: "Pokemon";
 }
 
 #background {
@@ -51,7 +52,6 @@ body {
 #metadata {
   display: flex;
   flex-direction: column;
-  font-family: "Pokemon";
   gap: 1vh;
   color: white;
   text-indent: 1px;
@@ -137,12 +137,4 @@ body {
   background-color: white;
   border-radius: 5px;
   height: 100%;
-}
-
-#progressBar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 0.25vh;
-  background-color: white;
 }

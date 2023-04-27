@@ -1,6 +1,3 @@
-let progress = 0,
-  total;
-
 const displayMetadata = ({ track, game, cover }) => {
   document.getElementById("pagetitle").innerHTML = `♫ ${game}`;
   document.getElementById("gameInfo").innerHTML = game;
@@ -36,11 +33,6 @@ const getDelay = () => {
 const updateTimer = ({ remainingTime }) =>
   setTimeout(getMetadata, (remainingTime + getDelay()) * 1000);
 
-const updateProgressBar = ({ remainingTime, trackLength }) => {
-  progress = trackLength - remainingTime - getDelay();
-  total = trackLength;
-};
-
 const getMetadata = () => {
   const xmlhttp = new XMLHttpRequest();
 
@@ -51,7 +43,6 @@ const getMetadata = () => {
       if (!data.error) {
         displayMetadata(data);
         updateMediaSession(data);
-        updateProgressBar(data);
         updateTimer(data);
       } else {
         document.getElementById("gameInfo").innerHTML = "Music server is down";
@@ -65,6 +56,8 @@ const getMetadata = () => {
 };
 
 const handleTogglePlayback = (audio) => () => {
+  const playPause = document.getElementById("playPause");
+
   if (audio.paused) {
     audio.src = `http://[IP]:8000/gamemusic?t=${new Date().getTime()}`;
     audio.load();
@@ -78,6 +71,8 @@ const handleTogglePlayback = (audio) => () => {
 };
 
 const handleToggleMute = (audio) => () => {
+  const muted = document.getElementById("muted");
+
   if (audio.muted) {
     audio.muted = false;
     muted.src = "assets/unmuted.png";
@@ -116,10 +111,4 @@ const setupControls = () => {
 window.onload = () => {
   getMetadata();
   setupControls();
-  setInterval(() => {
-    progress++;
-    document.getElementById("progressBar").style.width = `${
-      (progress / total) * 100
-    }%`;
-  }, 1000);
 };
