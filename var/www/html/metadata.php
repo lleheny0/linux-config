@@ -26,9 +26,11 @@
   $time2total = $time2minutes * 60 + $time2seconds;
   $remainingTime = $time2total - $time1total;
 
+  $trackWithTime = $track . " (" . $times[1] . ")";
+
   echo json_encode(array(
     "game" => $game,
-    "track" => $track,
+    "track" => $trackWithTime,
     "cover" => $cover,
     "remainingTime" => $remainingTime,
   ));
