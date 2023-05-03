@@ -4,15 +4,16 @@
 }
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  overflow: hidden;
 }
 
 html,
 body {
-  margin: 0;
-  padding: 0;
   height: 100svh;
+  width: 100vw;
+  overflow: hidden;
 }
 
 body {
@@ -22,7 +23,6 @@ body {
   flex-direction: column;
   justify-content: end;
   height: 100svh;
-  overflow: hidden;
   font-family: "Pokemon";
 }
 
@@ -30,16 +30,28 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: -2;
+  overflow: hidden;
 }
 
 #background > img {
   width: 100vw;
   height: 100svh;
   object-fit: cover;
-  filter: blur(50px);
-  transform: scale(1.125) translate3d(0, 0, 0);
-  opacity: 0.5;
+  filter: invert(1) hue-rotate(180deg) saturate(2);
+  transform: scale(-1);
+}
+
+#blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100svh;
+  z-index: -1;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(10vh);
+  -webkit-backdrop-filter: blur(10vh);
 }
 
 #metadataContainer {
