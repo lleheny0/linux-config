@@ -107,6 +107,12 @@ const setupControls = () => {
       handleTogglePlayback(audio)
     );
   }
+
+  window.addEventListener("keydown", function (e) {
+    if (e.key === " ") {
+      handleTogglePlayback(audio)();
+    }
+  });
 };
 
 window.onload = () => {
