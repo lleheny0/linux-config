@@ -26,8 +26,9 @@ const updateMediaSession = ({ track, game, cover }) => {
 
 const getDelay = () => {
   const { currentTime, duration } = document.getElementById("audio");
+  const delay = Math.ceil(duration - currentTime);
 
-  return Math.ceil((duration || 0) - (currentTime || 0) || 4);
+  return isFinite(delay) ? delay : 4;
 };
 
 const updateTimer = ({ remainingTime }) =>
