@@ -58,6 +58,10 @@ body {
   line-height: normal;
 }
 
+#cover {
+  overflow: visible;
+}
+
 #cover > img {
   height: 25vh;
   width: 25vh;
@@ -65,6 +69,7 @@ body {
   max-width: 50vh;
   object-fit: contain;
   object-position: left bottom;
+  filter: drop-shadow(0 0 2vh rgba(0, 0, 0, 1));
 }
 
 #gameInfo {
