@@ -75,6 +75,14 @@ body {
   font-size: max(3vh, 20px);
 }
 
+#kirby {
+  width: 10vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 5vh;
+}
+
 #controls {
   display: flex;
   align-items: center;
