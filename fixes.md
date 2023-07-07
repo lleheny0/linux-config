@@ -16,7 +16,7 @@ Set `media.ffvpx.enabled` to `false` in about:config
 ## Firefox: Tweaks
 1. https://wiki.archlinux.org/title/firefox#Frame_rate
 2. https://wiki.archlinux.org/title/firefox#Hardware_video_acceleration
-
+3. https://wiki.archlinux.org/title/Firefox#Font_troubleshooting
 
 ## Vulkan: Games have random flickering textures
 This happens because games are using the `amdvlk` driver instead of the `vulkan-radeon` driver. More info [here](https://wiki.archlinux.org/title/Vulkan).
