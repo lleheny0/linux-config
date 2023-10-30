@@ -7,13 +7,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 html,
 body {
   height: 100svh;
   width: 100vw;
-  overflow: hidden;
 }
 
 body {
@@ -38,8 +38,7 @@ body {
   width: 100vw;
   height: 100svh;
   object-fit: cover;
-  filter: invert(1) hue-rotate(180deg) saturate(2);
-  transform: scale(-1);
+  transform: translate3d(0, 0, 0);
 }
 
 #blur {
@@ -49,9 +48,10 @@ body {
   width: 100vw;
   height: 100svh;
   z-index: -1;
-  background-color: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(10vh);
-  -webkit-backdrop-filter: blur(10vh);
+  background-color: transparent;
+  backdrop-filter: blur(2vh);
+  -webkit-backdrop-filter: blur(5vh);
+  transform: translate3d(0, 0, 0);
 }
 
 #metadataContainer {
@@ -59,6 +59,10 @@ body {
   display: flex;
   flex-direction: column;
   gap: 5vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10vh);
+  -webkit-backdrop-filter: blur(10vh);
+  transform: translate3d(0, 0, 0);
 }
 
 #metadata {
@@ -77,19 +81,28 @@ body {
 #cover > img {
   height: 25vh;
   width: 25vh;
-  max-height: 50vh;
-  max-width: 50vh;
   object-fit: contain;
   object-position: left bottom;
-  filter: drop-shadow(0 0 2vh rgba(0, 0, 0, 1));
+  filter: drop-shadow(0 0 2vh rgba(0, 0, 0, 0.5));
+  margin: 5vh;
 }
 
 #gameInfo {
   font-size: max(5vh, 32px);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  /* text-shadow: 3px 3px 0 black; */
 }
 
 #trackInfo {
   font-size: max(3vh, 20px);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  /* text-shadow: 2px 2px 0 black; */
 }
 
 #kirby {
@@ -102,14 +115,14 @@ body {
 
 #controls {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 5vh;
   background-color: transparent;
-  width: calc(100vw - 10vh);
 }
 
 .controlButton {
-  height: 7.5vh;
+  height: max(6.25vh, 24px);
   cursor: pointer;
   display: inline;
 }
@@ -121,7 +134,7 @@ body {
 }
 
 #muted {
-  height: 5vh;
+  height: max(5vh, 16px);
 }
 
 #volume {
@@ -129,11 +142,11 @@ body {
   -moz-appearance: none;
   appearance: none;
   background-color: rgb(0, 0, 0, 0.5);
-  height: 2.5vh;
+  height: 1.5vh;
   width: 20vh;
   outline: none;
   cursor: pointer;
-  border-radius: 0.5vh;
+  border-radius: 1vh;
 }
 
 #volume::-moz-range-thumb {
@@ -142,7 +155,7 @@ body {
   appearance: none;
   border: none;
   border-radius: 0;
-  height: 2.5vh;
+  height: 1.5vh;
   width: 0;
 }
 
@@ -152,14 +165,14 @@ body {
   appearance: none;
   border: none;
   border-radius: 0;
-  height: 2.5vh;
-  width: 2.5vh;
+  height: 1.5vh;
+  width: 1.5vh;
   background-color: white;
-  border-radius: 0.5vh;
+  border-radius: 1vh;
 }
 
 #volume::-moz-range-progress {
   background-color: white;
-  border-radius: 5px;
+  border-radius: 1vh;
   height: 100%;
 }

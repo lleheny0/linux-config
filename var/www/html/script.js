@@ -1,3 +1,5 @@
+let isFirstRun = true;
+
 const displayMetadata = ({ track, game, cover }) => {
   document.getElementById("pagetitle").innerHTML = `♫ ${game}`;
   document.getElementById("gameInfo").innerHTML = game;
@@ -60,7 +62,7 @@ const handleTogglePlayback = (audio) => () => {
   const playPause = document.getElementById("playPause");
 
   if (audio.paused) {
-    audio.src = `http://[IP]:8000/gamemusic?t=${new Date().getTime()}`;
+    audio.src = `http://leheny.ddns.net:8000/gamemusic?t=${new Date().getTime()}`;
     audio.load();
     audio.play();
     playPause.src = "assets/stop.png";
@@ -111,6 +113,12 @@ const setupControls = () => {
   window.addEventListener("keydown", function (e) {
     if (e.key === " ") {
       handleTogglePlayback(audio)();
+    }
+    if (e.key === "f") {
+      console.log(document.fullscreenEnabled);
+      document.fullscreenElement === null
+        ? document.documentElement.requestFullscreen()
+        : document.exitFullscreen();
     }
   });
 };
