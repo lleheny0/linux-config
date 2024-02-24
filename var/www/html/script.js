@@ -1,5 +1,3 @@
-let isFirstRun = true;
-
 const displayMetadata = ({ track, game, cover }) => {
   document.getElementById("pagetitle").innerHTML = `♫ ${game}`;
   document.getElementById("gameInfo").innerHTML = game;
@@ -86,7 +84,7 @@ const handleToggleMute = (audio) => () => {
 };
 
 const handleChangeVolume = (audio) => (e) => {
-  audio.volume = e.target.value;
+  audio.volume = e.target.value * e.target.value;
 };
 
 const setupControls = () => {
